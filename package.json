@@ -1,0 +1,54 @@
+{
+  "name": "@vizhub/scientific-colormaps",
+  "version": "0.1.0",
+  "description": "Fabio Crameri's accessible scientific colormaps for JavaScript, D3, and TypeScript",
+  "type": "module",
+  "license": "MIT",
+  "sideEffects": false,
+  "main": "./src/index.js",
+  "types": "./src/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./src/index.d.ts",
+      "default": "./src/index.js"
+    },
+    "./schemes": {
+      "types": "./src/schemes.d.ts",
+      "default": "./src/schemes.js"
+    }
+  },
+  "files": [
+    "src/",
+    "README.md",
+    "LICENSE",
+    "NOTICE.md"
+  ],
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "test": "node --test",
+    "prepack": "npm test"
+  },
+  "publishConfig": {
+    "access": "public"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vizhub-studio/scientific-colormaps.git"
+  },
+  "keywords": [
+    "colormap",
+    "color",
+    "d3",
+    "perceptual",
+    "scientific",
+    "crameri",
+    "visualization",
+    "typescript"
+  ],
+  "homepage": "https://github.com/vizhub-studio/scientific-colormaps#readme",
+  "bugs": {
+    "url": "https://github.com/vizhub-studio/scientific-colormaps/issues"
+  }
+}
