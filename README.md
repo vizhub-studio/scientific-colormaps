@@ -10,7 +10,7 @@ An independent, dependency-free npm package of **Fabio Crameri's Scientific Colo
 npm install @vizhub/scientific-colormaps
 ```
 
-**Release status:** The initial npm publication is pending. Confirm access to the `@vizhub` npm organization before publishing.
+**Release status:** Published on npm as `@vizhub/scientific-colormaps` (maintainer-confirmed November 23, 2026). Run `npm view @vizhub/scientific-colormaps version` to confirm the currently available registry version before announcing or demoing it. The package's declared source version is not a substitute for a live registry check.
 
 ## Use
 
@@ -64,12 +64,12 @@ npm pack --dry-run
 
 No dependency installation or bundling is required. The package publishes directly from `src/` as ESM with bundled TypeScript declarations.
 
-## Release checklist
+## Future release checklist
 
-1. Confirm `@vizhub` npm organization ownership and publish permissions.
+1. Confirm `@vizhub` npm organization ownership and publish permissions; check the already-published version with `npm view @vizhub/scientific-colormaps version` before bumping the package version.
 2. Confirm upstream attribution and license terms in `NOTICE.md`.
 3. Run `npm test && npm pack --dry-run` in the repository root and confirm the included file list.
-4. Publish `npm publish --access public` from the repository root using trusted npm authentication.
+4. Publish a new, incremented version with `npm publish --access public` using trusted npm authentication, then confirm that the registry reports that version.
 5. Configure npm trusted publishing and provenance if automated releases are desired.
 
 This repository is the canonical standalone package. The corresponding draft in the VizHub application repository is superseded.
