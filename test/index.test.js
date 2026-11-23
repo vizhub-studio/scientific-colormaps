@@ -1,8 +1,14 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import {
-  schemes, rawschemes, paletteNames, ramp, getColormap,
-  interpolateColormap, createInterpolator, sampleColormap
+  schemes,
+  rawschemes,
+  paletteNames,
+  ramp,
+  getColormap,
+  interpolateColormap,
+  createInterpolator,
+  sampleColormap,
 } from "../src/index.js";
 
 test("source is 40 complete 256-color lookup tables", () => {
@@ -30,8 +36,8 @@ test("lookup returns a fresh array and supports names, suffixes, and options", (
   const reversed = getColormap("batlow_r");
   assert.deepEqual(normal, schemes.batlow);
   assert.deepEqual(reversed, [...normal].reverse());
-  assert.deepEqual(getColormap("batlow", {reverse:true}), reversed);
-  assert.deepEqual(getColormap("batlow_r", {reverse:true}), normal);
+  assert.deepEqual(getColormap("batlow", { reverse: true }), reversed);
+  assert.deepEqual(getColormap("batlow_r", { reverse: true }), normal);
   normal[0] = "#000000";
   assert.equal(schemes.batlow[0], "#011959");
 });
@@ -56,11 +62,17 @@ test("interpolation and notebook-style ramp", () => {
   const custom = ramp(["#000000", "#ffffff"]);
   assert.equal(custom(0.5), "#808080");
   assert.equal(custom(0.25), "#404040");
-  assert.equal(ramp(["#000000","#ffffff"], {reverse:true})(0), "#ffffff");
+  assert.equal(ramp(["#000000", "#ffffff"], { reverse: true })(0), "#ffffff");
   assert.equal(ramp(schemes.roma)(0), schemes.roma[0]);
   assert.equal(ramp("roma")(1), schemes.roma[255]);
-  assert.equal(sampleColormap("berlin", 1)[0], interpolateColormap("berlin", 0.5));
-  assert.deepEqual(sampleColormap("roma", 2), [schemes.roma[0], schemes.roma[255]]);
+  assert.equal(
+    sampleColormap("berlin", 1)[0],
+    interpolateColormap("berlin", 0.5),
+  );
+  assert.deepEqual(sampleColormap("roma", 2), [
+    schemes.roma[0],
+    schemes.roma[255],
+  ]);
 });
 
 test("invalid names, samples, and interpolator arguments fail", () => {
@@ -71,5 +83,5 @@ test("invalid names, samples, and interpolator arguments fail", () => {
   assert.throws(() => sampleColormap("roma", 65537), RangeError);
   assert.throws(() => createInterpolator("roma")(Number.NaN), TypeError);
   assert.throws(() => ramp([]), TypeError);
-  assert.throws(() => ramp(["red","blue"]), TypeError);
+  assert.throws(() => ramp(["red", "blue"]), TypeError);
 });
