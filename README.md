@@ -2,7 +2,7 @@
 
 An independent, dependency-free npm package of **Fabio Crameri's Scientific Colour Maps**, usable from JavaScript, TypeScript, D3, and Observable Plot. Inspired by [Fil's Observable colormaps notebook](https://observablehq.com/@fil/colormaps); it does **not** copy the notebook's UI code.
 
-**Data snapshot:** Scientific Colour Maps **8.0.1** (2023), from 40 full-resolution 256-step lookup tables. This is a pinned dataset, not a claim to provide the latest release. See [NOTICE.md](NOTICE.md) for provenance and licensing.
+**Data snapshot:** Scientific Colour Maps **9.0.0** (2026), from 43 full-resolution 256-step lookup tables. This is a pinned dataset, not a claim to provide the latest release. See [NOTICE.md](NOTICE.md) for provenance and licensing.
 
 ## Install
 
@@ -16,11 +16,11 @@ npm install @vizhub/scientific-colormaps
 
 ```js
 import {
-  paletteNames, schemes, ramp, getColormap,
+  paletteNames, schemes, ramp, getColormap, scientificColourMapsVersion,
   createInterpolator, interpolateColormap, sampleColormap
 } from "@vizhub/scientific-colormaps";
 
-paletteNames;                       // 40 names, e.g. "batlow", "berlin", "roma"
+paletteNames;                       // 43 names, e.g. "batlow", "berlin", "roma"
 schemes.batlow;                     // readonly 256-element hex array
 getColormap("batlow");              // fresh mutable copy
 getColormap("batlow_r");            // reversed palette
@@ -45,7 +45,9 @@ There is **no runtime dependency on D3**; pass the returned interpolator whereve
 
 ## API
 
-- `paletteNames`: array of 40 canonical camel-case identifiers, frozen.
+- `scientificColourMapsVersion`: pinned upstream dataset version (`"9.0.0"`).
+
+- `paletteNames`: array of 43 canonical camel-case identifiers, frozen.
 - `schemes`/`rawschemes`: lookup object of frozen 256-element `#rrggbb` arrays.
 - `getColormap(name, {reverse?})`: fresh palette array.
 - `interpolateColormap(name, t, {reverse?})`: piecewise-linear interpolation in sRGB, with `t` clamped to `[0,1]`.
@@ -55,7 +57,13 @@ There is **no runtime dependency on D3**; pass the returned interpolator whereve
 
 Names are case-insensitive, and suffix `_r` reverses the order. A `reverse: true` option combined with `_r` reverses twice (restoring the original order). Non-finite inputs, invalid names, and invalid sample counts throw descriptive errors.
 
+## Migration from 0.2.0
+
+The API is unchanged, but upstream revised existing palette RGB values (including `vik`, `berlin`, and the direction of `fes`) and added `delphi`, `ston`, and `batlowO`. Pin 0.2.0 for exact reproduction of the 8.0.1 colors.
+
 ## Development
+
+`npm run generate` downloads the canonical, checksum-pinned Zenodo archive with Python 3 and regenerates the committed tables, type names, and upstream license. `npm run generate -- --check` verifies the committed outputs against that archive. A local archive can be supplied with `--archive PATH`.
 
 ```bash
 npm test
@@ -78,5 +86,5 @@ This repository is the canonical standalone package. The corresponding draft in 
 
 - [Fil's Observable notebook](https://observablehq.com/@fil/colormaps)
 - [Scientific Colour Maps](https://www.fabiocrameri.ch/colourmaps/)
-- [Fabio Crameri, Scientific Colour Maps 8.0.1, DOI 10.5281/zenodo.8409685](https://doi.org/10.5281/zenodo.8409685)
-- [Transcription/generator by justdan96](https://github.com/justdan96/fabio-crameri-palette-generator)
+- [Fabio Crameri, Scientific Colour Maps 9.0.0, DOI 10.5281/zenodo.24343380](https://doi.org/10.5281/zenodo.24343380)
+- [Historical 8.0.1 transcription by justdan96](https://github.com/justdan96/fabio-crameri-palette-generator)
