@@ -14,7 +14,7 @@ Palette designs and data: Scientific Colour Maps, © Fabio Crameri (2026), relea
 - Pinned archive: ScientificColourMaps9.zip, MD5 316c0cdbcec46d377f74c6c59523c7f0.
 - Archive license source: ScientificColourMaps9/+LICENCE.pdf.
 
-The new tables must be extracted directly from the checksum-verified official archive and committed as static hex values. The generator validates the upstream license and reproduces its complete text in the distributed package. The official 9.0.0 PDF explicitly grants the MIT license and identifies Fabio Crameri as the 2026 copyright holder. The complete extracted notice is distributed in src/upstream-license.txt. Do not assume the wrapper's MIT license overrides upstream terms. Normal package CI does not fetch the archive.
+All 42 continuous tables are extracted directly from the checksum-verified official archive and committed as static hex values. The generator validates the upstream license and reproduces its complete text in the distributed package. The official 9.0.0 PDF explicitly grants the MIT license and identifies Fabio Crameri as the 2026 copyright holder. The complete extracted notice is distributed in src/upstream-license.txt. Do not assume the wrapper's MIT license overrides upstream terms. Normal package CI does not fetch the archive.
 
 ## Inspiration and historical provenance
 
