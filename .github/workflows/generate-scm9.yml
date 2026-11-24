@@ -15,6 +15,8 @@ jobs:
       - uses: actions/checkout@v4
         with:
           persist-credentials: false
+      - name: Install PDF text extraction tool
+        run: sudo apt-get update && sudo apt-get install -y poppler-utils
       - name: Download and inspect release rights (read-only)
         run: |
           archive="$RUNNER_TEMP/ScientificColourMaps9.zip"
@@ -29,7 +31,7 @@ jobs:
                   if m.is_dir(): continue
                   if len(p.parts) <= 2 or re.search(r'licen[cs]|copyright|terms|readme', p.name, re.I):
                       print("ARCHIVE_PATH", m.filename, m.file_size)
-                  if re.search(r'licen[cs]|copyright|terms|readme', p.name, re.I) and m.file_size < 10000000:
+                  if len(p.parts) <= 2 and re.search(r'licen[cs]|copyright|terms|readme', p.name, re.I) and m.file_size < 10000000:
                       if p.suffix.lower() in {'.txt','.md','.rst',''}:
                           data = z.read(m).decode('utf-8-sig', errors='replace')
                           print("NOTICE", m.filename, data[:12000])
@@ -39,6 +41,7 @@ jobs:
                               pdf.write_bytes(z.read(m))
                               try:
                                   data = subprocess.check_output(['pdftotext',str(pdf),'-'], text=True)
+                                  if p.name == '+LICENCE.pdf': print('FULL_LICENSE_TEXT', data)
                                   lines = data.splitlines()
                                   for i,line in enumerate(lines):
                                       if re.search(r'licen[cs]|copyright|redistribut|permission|commercial|MIT', line, re.I):
