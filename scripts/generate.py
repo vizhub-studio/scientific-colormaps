@@ -48,7 +48,10 @@ def generate(archive):
                 raise ValueError(f"{p.stem}: expected 256 rows, found {len(colors)}")
             tables[p.stem] = colors
     if set(tables) != set(NAMES):
-        raise ValueError(f"Missing canonical tables: {sorted(set(NAMES) - set(tables))}")
+        missing = sorted(set(NAMES) - set(tables))
+        with zipfile.ZipFile(archive) as z:
+            candidates = [name for name in z.namelist() if any(PurePosixPath(name).stem.lower().startswith(key.lower().rstrip("w")) for key in missing) and name.lower().endswith(".txt")]
+        raise ValueError(f"Missing canonical tables: {missing}; candidate archive paths: {candidates[:100]}")
     if not licenses:
         raise ValueError("Cannot verify upstream MIT notice; review archive licensing")
     notice = sorted(licenses)[0][2].rstrip() + "\n"
