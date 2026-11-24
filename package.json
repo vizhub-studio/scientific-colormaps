@@ -1,6 +1,6 @@
 {
   "name": "@vizhub/scientific-colormaps",
-  "version": "0.3.0",
+  "version": "9.0.0",
   "description": "Fabio Crameri's accessible scientific colormaps for JavaScript, D3, and TypeScript",
   "type": "module",
   "license": "MIT",
