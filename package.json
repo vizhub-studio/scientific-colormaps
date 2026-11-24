@@ -32,7 +32,7 @@
     "prepack": "npm test"
   },
   "devDependencies": {
-    "prettier": "^3.3.3"
+    "prettier": "^3.10.1"
   },
   "publishConfig": {
     "access": "public"

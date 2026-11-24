@@ -1,16 +1,14 @@
 # @vizhub/scientific-colormaps
 
-An independent, dependency-free npm package of **Fabio Crameri's Scientific Colour Maps**, usable from JavaScript, TypeScript, D3, and Observable Plot. Inspired by [Fil's Observable colormaps notebook](https://observablehq.com/@fil/colormaps); it does **not** copy the notebook's UI code.
+An independent, dependency-free npm package of **Fabio Crameri's Scientific Colour Maps**, usable from JavaScript, TypeScript, D3, and Observable Plot. Inspired by [Fil's Observable colormaps notebook](https://observablehq.com/@fil/colormaps).
 
-**Data snapshot:** Scientific Colour Maps **8.0.1** (2023), from 40 full-resolution 256-step lookup tables. This is a pinned dataset, not a claim to provide the latest release. See [NOTICE.md](NOTICE.md) for provenance and licensing.
+**Data snapshot:** Scientific Colour Maps **8.0.1** (2023).
 
 ## Install
 
 ```bash
 npm install @vizhub/scientific-colormaps
 ```
-
-**Release status:** Published on npm as `@vizhub/scientific-colormaps` (maintainer-confirmed November 23, 2026). Run `npm view @vizhub/scientific-colormaps version` to confirm the currently available registry version before announcing or demoing it. The package's declared source version is not a substitute for a live registry check.
 
 ## Use
 
@@ -55,28 +53,8 @@ There is **no runtime dependency on D3**; pass the returned interpolator whereve
 
 Names are case-insensitive, and suffix `_r` reverses the order. A `reverse: true` option combined with `_r` reverses twice (restoring the original order). Non-finite inputs, invalid names, and invalid sample counts throw descriptive errors.
 
-## Development
-
-```bash
-npm test
-npm pack --dry-run
-```
-
-No dependency installation or bundling is required. The package publishes directly from `src/` as ESM with bundled TypeScript declarations.
-
-## Future release checklist
-
-1. Confirm `@vizhub` npm organization ownership and publish permissions; check the already-published version with `npm view @vizhub/scientific-colormaps version` before bumping the package version.
-2. Confirm upstream attribution and license terms in `NOTICE.md`.
-3. Run `npm test && npm pack --dry-run` in the repository root and confirm the included file list.
-4. Publish a new, incremented version with `npm publish --access public` using trusted npm authentication, then confirm that the registry reports that version.
-5. Configure npm trusted publishing and provenance if automated releases are desired.
-
-This repository is the canonical standalone package. The corresponding draft in the VizHub application repository is superseded.
-
 ## References
 
 - [Fil's Observable notebook](https://observablehq.com/@fil/colormaps)
 - [Scientific Colour Maps](https://www.fabiocrameri.ch/colourmaps/)
 - [Fabio Crameri, Scientific Colour Maps 8.0.1, DOI 10.5281/zenodo.8409685](https://doi.org/10.5281/zenodo.8409685)
-- [Transcription/generator by justdan96](https://github.com/justdan96/fabio-crameri-palette-generator)
