@@ -12,7 +12,10 @@ test("npm exports resolve through package self-reference", async () => {
   assert.equal(main.schemes, schemesModule.schemes);
   assert.equal(main.paletteNames, schemesModule.paletteNames);
   assert.equal(main.scientificColourMapsVersion, "9.0.0");
-  assert.equal(main.scientificColourMapsVersion, schemesModule.scientificColourMapsVersion);
+  assert.equal(
+    main.scientificColourMapsVersion,
+    schemesModule.scientificColourMapsVersion,
+  );
   assert.equal(main.sampleColormap("batlow", 3).length, 3);
 });
 
