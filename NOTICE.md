@@ -1,14 +1,13 @@
 # Attribution and third-party notices
 
-**Palette designs and data**: Scientific Colour Maps, © Fabio Crameri (2023), release **8.0.1**.
+Palette designs and data: Scientific Colour Maps, © Fabio Crameri (2026), release 9.0.0.
 
-- Authoritative release: https://doi.org/10.5281/zenodo.8409685
+- Authoritative release: https://doi.org/10.5281/zenodo.24343380
 - Project: https://www.fabiocrameri.ch/colourmaps/
-- Published scientific reference: Crameri, F. (2018). Scientific colour maps. Zenodo. https://doi.org/10.5281/zenodo.1243862
-- Data conversion source: https://github.com/justdan96/fabio-crameri-palette-generator/blob/main/colormaps.js (script: `palette-to-js.py`).
+- Scientific reference: Crameri, F. (2018). Scientific colour maps. Zenodo. https://doi.org/10.5281/zenodo.1243862
 
-The data is the Version 8 snapshot transcribed by the referenced generator. That generator is credited for the conversion; the palette designs are credited to Fabio Crameri. The Scientific Colour Maps 8.0.1 distribution is provided under the upstream MIT license; preserve the original upstream notice when re-distributing updated datasets. This library's handwritten JavaScript wrapper is also MIT licensed.
+The generator reads the official archive directly, verifies its published checksum, and preserves the upstream license verbatim in src/upstream-license.txt. Generation fails if an upstream MIT notice cannot be verified; do not release until this file is committed and reviewed. This library's handwritten JavaScript wrapper is MIT licensed.
 
-Fil's [Observable notebook](https://observablehq.com/@fil/colormaps) is credited as API inspiration but its code and UI were not copied. The older Fil gist labels notebook-associated material CC BY 4.0; that license is not represented as a license grant for code copied into this package.
+The previous 8.0.1 dataset was transcribed by https://github.com/justdan96/fabio-crameri-palette-generator; credited for historical conversion. Fil's https://observablehq.com/@fil/colormaps is credited as API inspiration; its code and UI were not copied.
 
-**Versioning**: The library package version (0.1.0) is independent of the pinned palette dataset version (8.0.1); use an explicit data upgrade PR to change the latter.
+The library version and upstream data version are independent. Pin the previous library release for reproducibility.
