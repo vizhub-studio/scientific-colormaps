@@ -2,7 +2,7 @@
 
 An independent, dependency-free npm package of **Fabio Crameri's Scientific Colour Maps**, usable from JavaScript, TypeScript, D3, and Observable Plot. Inspired by [Fil's Observable colormaps notebook](https://observablehq.com/@fil/colormaps); it does **not** copy the notebook's UI code.
 
-**Data snapshot:** Scientific Colour Maps **9.0.0** (2026), from 43 full-resolution 256-step lookup tables. This is a pinned dataset, not a claim to provide the latest release. See [NOTICE.md](NOTICE.md) for provenance and licensing.
+**Data snapshot:** Scientific Colour Maps **9.0.0** (2026), from 42 full-resolution 256-step lookup tables. This is a pinned dataset, not a claim to provide the latest release. See [NOTICE.md](NOTICE.md) for provenance and licensing.
 
 ## Install
 
@@ -20,7 +20,7 @@ import {
   createInterpolator, interpolateColormap, sampleColormap
 } from "@vizhub/scientific-colormaps";
 
-paletteNames;                       // 43 names, e.g. "batlow", "berlin", "roma"
+paletteNames;                       // 42 names, e.g. "batlow", "berlin", "roma"
 schemes.batlow;                     // readonly 256-element hex array
 getColormap("batlow");              // fresh mutable copy
 getColormap("batlow_r");            // reversed palette
@@ -47,7 +47,7 @@ There is **no runtime dependency on D3**; pass the returned interpolator whereve
 
 - `scientificColourMapsVersion`: pinned upstream dataset version (`"9.0.0"`).
 
-- `paletteNames`: array of 43 canonical camel-case identifiers, frozen.
+- `paletteNames`: array of 42 canonical camel-case identifiers, frozen.
 - `schemes`/`rawschemes`: lookup object of frozen 256-element `#rrggbb` arrays.
 - `getColormap(name, {reverse?})`: fresh palette array.
 - `interpolateColormap(name, t, {reverse?})`: piecewise-linear interpolation in sRGB, with `t` clamped to `[0,1]`.
@@ -59,7 +59,7 @@ Names are case-insensitive, and suffix `_r` reverses the order. A `reverse: true
 
 ## Migration from 0.2.0
 
-The API is unchanged, but upstream revised existing palette RGB values (including `vik`, `berlin`, and the direction of `fes`) and added `delphi`, `ston`, and `batlowO`. Pin 0.2.0 for exact reproduction of the 8.0.1 colors.
+The interpolation API is unchanged, but upstream revised existing palette RGB values (including `vik`, `berlin`, and the direction of `fes`) and added `delphi`, `ston`, and `batlowO`. The pinned 9.0.0 archive has no continuous `naviaW` table, so that name is no longer available; no older table or substitute is silently labeled 9.0.0. Pin 0.2.0 for `naviaW` or exact reproduction of the 8.0.1 colors.
 
 ## Development
 

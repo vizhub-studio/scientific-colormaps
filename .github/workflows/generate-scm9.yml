@@ -24,8 +24,10 @@ jobs:
           node-version: 22
       - name: Generate from pinned upstream archive
         run: |
-          npm run generate
-          npm run generate -- --check
+          archive="$RUNNER_TEMP/ScientificColourMaps9.zip"
+          curl --fail --location --retry 3 --retry-delay 5 --max-time 180 -o "$archive" 'https://zenodo.org/records/24343380/files/ScientificColourMaps9.zip?download=1'
+          npm run generate -- --archive "$archive"
+          npm run generate -- --archive "$archive" --check
       - name: Validate package
         run: |
           npm test

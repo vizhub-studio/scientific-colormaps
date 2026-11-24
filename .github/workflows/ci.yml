@@ -24,24 +24,3 @@ jobs:
         run: npm test
       - name: Inspect publishable tarball
         run: npm pack --dry-run
-
-  # Temporary read-only regeneration diagnostics; remove after committing outputs.
-  regenerate:
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - uses: actions/checkout@v4
-      - name: Generate from checksum-pinned authoritative archive
-        run: python3 scripts/generate.py
-      - name: Report generated tables and license for remediation
-        run: |
-          python3 - <<'PY'
-          import json, re
-          from pathlib import Path
-          js = Path("src/schemes.js").read_text()
-          for name, block in re.findall(r"^      (\w+): \[\n(.*?)^      \],", js, re.M | re.S):
-              colors = re.findall(r'"#([0-9a-f]{6})"', block)
-              print("SCM_TABLE " + name + " " + "".join(colors))
-          for path in ["src/palette-names.d.ts", "src/upstream-license.txt"]:
-              print("SCM_FILE " + json.dumps([path, Path(path).read_text()]))
-          PY

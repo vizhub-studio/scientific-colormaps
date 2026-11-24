@@ -14,7 +14,8 @@ VERSION = "9.0.0"
 DOI = "10.5281/zenodo.24343380"
 URL = "https://zenodo.org/records/24343380/files/ScientificColourMaps9.zip?download=1"
 MD5 = "316c0cdbcec46d377f74c6c59523c7f0"
-NAMES = sorted("acton bam bamO bamako batlow batlowK batlowW batlowO berlin bilbao broc brocO buda bukavu cork corkO davos delphi devon fes glasgow grayC hawaii imola lajolla lapaz lipari lisbon managua navia naviaW nuuk oleron oslo roma romaO ston tofino tokyo turku vanimo vik vikO".split())
+# naviaW existed in 8.0.1 but has no continuous table in the pinned 9.0.0 archive.
+NAMES = sorted("acton bam bamO bamako batlow batlowK batlowW batlowO berlin bilbao broc brocO buda bukavu cork corkO davos delphi devon fes glasgow grayC hawaii imola lajolla lapaz lipari lisbon managua navia nuuk oleron oslo roma romaO ston tofino tokyo turku vanimo vik vikO".split())
 
 def generate(archive):
     digest = hashlib.md5(usedforsecurity=False)

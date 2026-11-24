@@ -12,9 +12,11 @@ import {
   sampleColormap,
 } from "../src/index.js";
 
-test("source is 43 complete 256-color lookup tables", () => {
-  assert.equal(paletteNames.length, 43);
+test("source is 42 complete 256-color lookup tables", () => {
+  assert.equal(paletteNames.length, 42);
   assert.equal(scientificColourMapsVersion, "9.0.0");
+  assert(!paletteNames.includes("naviaW"));
+  assert.throws(() => getColormap("naviaW"), RangeError);
   for (const name of ["delphi", "ston", "batlowO"]) assert(paletteNames.includes(name));
   assert.equal(rawschemes, schemes);
   assert(Object.isFrozen(schemes));
