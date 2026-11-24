@@ -1,45 +1,6 @@
-/** Canonical palette identifiers (case-insensitive when passed to functions). */
-export type ColormapName =
-  | "acton"
-  | "bam"
-  | "bamO"
-  | "bamako"
-  | "batlow"
-  | "batlowK"
-  | "batlowW"
-  | "berlin"
-  | "bilbao"
-  | "broc"
-  | "brocO"
-  | "buda"
-  | "bukavu"
-  | "cork"
-  | "corkO"
-  | "davos"
-  | "devon"
-  | "fes"
-  | "glasgow"
-  | "grayC"
-  | "hawaii"
-  | "imola"
-  | "lajolla"
-  | "lapaz"
-  | "lipari"
-  | "lisbon"
-  | "managua"
-  | "navia"
-  | "naviaW"
-  | "nuuk"
-  | "oleron"
-  | "oslo"
-  | "roma"
-  | "romaO"
-  | "tofino"
-  | "tokyo"
-  | "turku"
-  | "vanimo"
-  | "vik"
-  | "vikO";
+import type { ColormapName } from "./palette-names.js";
+export type { ColormapName } from "./palette-names.js";
+export declare const scientificColourMapsVersion: "9.0.0";
 export interface ColormapOptions {
   readonly reverse?: boolean;
 }

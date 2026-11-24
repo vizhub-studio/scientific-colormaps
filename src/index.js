@@ -1,6 +1,6 @@
 import { schemes, paletteNames } from "./schemes.js";
 
-export { schemes, paletteNames } from "./schemes.js";
+export { schemes, paletteNames, scientificColourMapsVersion } from "./schemes.js";
 
 /**
  * @typedef {{ reverse?: boolean }} ColormapOptions

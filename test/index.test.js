@@ -2,6 +2,7 @@ import test from "node:test";
 import assert from "node:assert/strict";
 import {
   schemes,
+  scientificColourMapsVersion,
   rawschemes,
   paletteNames,
   ramp,
@@ -11,8 +12,12 @@ import {
   sampleColormap,
 } from "../src/index.js";
 
-test("source is 40 complete 256-color lookup tables", () => {
-  assert.equal(paletteNames.length, 40);
+test("source is 42 complete 256-color lookup tables", () => {
+  assert.equal(paletteNames.length, 42);
+  assert.equal(scientificColourMapsVersion, "9.0.0");
+  assert(!paletteNames.includes("naviaW"));
+  assert.throws(() => getColormap("naviaW"), RangeError);
+  for (const name of ["delphi", "ston", "batlowO"]) assert(paletteNames.includes(name));
   assert.equal(rawschemes, schemes);
   assert(Object.isFrozen(schemes));
   assert(Object.isFrozen(paletteNames));
@@ -24,11 +29,11 @@ test("source is 40 complete 256-color lookup tables", () => {
   }
 });
 
-test("pinned palette regression values", () => {
-  assert.equal(schemes.berlin[0], "#9eb0ff");
-  assert.equal(schemes.berlin[255], "#ffadad");
-  assert.equal(schemes.batlow[0], "#011959");
-  assert.equal(schemes.batlow[255], "#faccfa");
+test("all named palettes resolve with exact endpoints and reversal", () => {
+  for (const name of paletteNames) {
+    assert.equal(interpolateColormap(name, 0), schemes[name][0]);
+    assert.equal(interpolateColormap(name + "_r", 0), schemes[name][255]);
+  }
 });
 
 test("lookup returns a fresh array and supports names, suffixes, and options", () => {
@@ -39,7 +44,8 @@ test("lookup returns a fresh array and supports names, suffixes, and options", (
   assert.deepEqual(getColormap("batlow", { reverse: true }), reversed);
   assert.deepEqual(getColormap("batlow_r", { reverse: true }), normal);
   normal[0] = "#000000";
-  assert.equal(schemes.batlow[0], "#011959");
+  assert.notEqual(normal, schemes.batlow);
+  assert.equal(schemes.batlow[0], reversed[255]);
 });
 
 test("exact endpoints, clamping, and reversals", () => {
