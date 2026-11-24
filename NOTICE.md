@@ -1,14 +1,24 @@
 # Attribution and third-party notices
 
-**Palette designs and data**: Scientific Colour Maps, © Fabio Crameri (2023), release **8.0.1**.
+## Package implementation
 
-- Authoritative release: https://doi.org/10.5281/zenodo.8409685
+The independently written JavaScript/TypeScript wrapper and generation scripts are MIT licensed by VizHub, Inc. See LICENSE. The wrapper does not incorporate Fil's notebook UI or the historical conversion script.
+
+## Scientific Colour Maps data
+
+Palette designs and data: Scientific Colour Maps, © Fabio Crameri (2026), release 9.0.0.
+
+- Authoritative release: https://doi.org/10.5281/zenodo.24343380
 - Project: https://www.fabiocrameri.ch/colourmaps/
-- Published scientific reference: Crameri, F. (2018). Scientific colour maps. Zenodo. https://doi.org/10.5281/zenodo.1243862
-- Data conversion source: https://github.com/justdan96/fabio-crameri-palette-generator/blob/main/colormaps.js (script: `palette-to-js.py`).
+- Scientific reference: Crameri, F. (2018). Scientific colour maps. Zenodo. https://doi.org/10.5281/zenodo.1243862
+- Pinned archive: ScientificColourMaps9.zip, MD5 316c0cdbcec46d377f74c6c59523c7f0.
+- Archive license source: ScientificColourMaps9/+LICENCE.pdf.
 
-The data is the Version 8 snapshot transcribed by the referenced generator. That generator is credited for the conversion; the palette designs are credited to Fabio Crameri. The Scientific Colour Maps 8.0.1 distribution is provided under the upstream MIT license; preserve the original upstream notice when re-distributing updated datasets. This library's handwritten JavaScript wrapper is also MIT licensed.
+All 42 continuous tables are extracted directly from the checksum-verified official archive and committed as static hex values. The generator validates the upstream license and reproduces its complete text in the distributed package. The official 9.0.0 PDF explicitly grants the MIT license and identifies Fabio Crameri as the 2026 copyright holder. The complete extracted notice is distributed in src/upstream-license.txt. Do not assume the wrapper's MIT license overrides upstream terms. Normal package CI does not fetch the archive.
 
-Fil's [Observable notebook](https://observablehq.com/@fil/colormaps) is credited as API inspiration but its code and UI were not copied. The older Fil gist labels notebook-associated material CC BY 4.0; that license is not represented as a license grant for code copied into this package.
+## Inspiration and historical provenance
 
-**Versioning**: The library package version (0.1.0) is independent of the pinned palette dataset version (8.0.1); use an explicit data upgrade PR to change the latter.
+- Fil's Observable notebook, https://observablehq.com/@fil/colormaps, inspired the API. Its notebook-specific license could not be verified from the public page. The related historical Gist https://gist.github.com/Fil/99c87f8cea688ffbe8a42243b95974ca declares MIT in .block metadata and CC BY 4.0 in its README. These conflicting labels are not treated as permission to copy notebook code; no such code or UI is incorporated in the new implementation.
+- The previous 8.0.1 dataset was transcribed from Fabio Crameri's palette data by https://github.com/justdan96/fabio-crameri-palette-generator (March 2024). GitHub reports no repository license and no LICENSE file was found. The historical converter is credited; its script is not bundled or used by the new generator. The 9.0.0 migration replaces all historical converted data directly from the original source.
+
+The library version and upstream data version are independent. Pin the previous library release for reproducibility.
