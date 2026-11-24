@@ -1,51 +1,35 @@
-name: Inspect pinned Scientific Colour Maps 9.0.0 archive
-
+name: Generate pinned Scientific Colour Maps 9.0.0
 on:
   push:
     branches: [upgrade-scientific-colour-maps-9]
-
 permissions:
-  contents: read
-
+  contents: write
+concurrency:
+  group: scm9-generation
+  cancel-in-progress: true
 jobs:
-  inspect:
+  generate:
     runs-on: ubuntu-latest
-    timeout-minutes: 10
+    timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
         with:
-          persist-credentials: false
-      - name: Install PDF text extraction tool
-        run: sudo apt-get update && sudo apt-get install -y poppler-utils
-      - name: Download and inspect release rights (read-only)
+          node-version: 22
+      - run: sudo apt-get update && sudo apt-get install -y poppler-utils
+      - name: Generate and verify
         run: |
           archive="$RUNNER_TEMP/ScientificColourMaps9.zip"
           curl --fail --location --retry 3 --retry-delay 5 --max-time 180 -o "$archive" 'https://zenodo.org/records/24343380/files/ScientificColourMaps9.zip?download=1'
-          echo "316c0cdbcec46d377f74c6c59523c7f0  $archive" | md5sum --check
-          python3 - "$archive" <<'PY'
-          import sys, zipfile, re, subprocess, tempfile
-          from pathlib import PurePosixPath, Path
-          with zipfile.ZipFile(sys.argv[1]) as z:
-              for m in z.infolist():
-                  p = PurePosixPath(m.filename)
-                  if m.is_dir(): continue
-                  if len(p.parts) <= 2 or re.search(r'licen[cs]|copyright|terms|readme', p.name, re.I):
-                      print("ARCHIVE_PATH", m.filename, m.file_size)
-                  if len(p.parts) <= 2 and re.search(r'licen[cs]|copyright|terms|readme', p.name, re.I) and m.file_size < 10000000:
-                      if p.suffix.lower() in {'.txt','.md','.rst',''}:
-                          data = z.read(m).decode('utf-8-sig', errors='replace')
-                          print("NOTICE", m.filename, data[:12000])
-                      elif p.suffix.lower() == '.pdf':
-                          with tempfile.TemporaryDirectory() as tmp:
-                              pdf = Path(tmp) / 'notice.pdf'
-                              pdf.write_bytes(z.read(m))
-                              try:
-                                  data = subprocess.check_output(['pdftotext',str(pdf),'-'], text=True)
-                                  if p.name == '+LICENCE.pdf': print('FULL_LICENSE_TEXT', data)
-                                  lines = data.splitlines()
-                                  for i,line in enumerate(lines):
-                                      if re.search(r'licen[cs]|copyright|redistribut|permission|commercial|MIT', line, re.I):
-                                          print("PDF_NOTICE", m.filename, '\n'.join(lines[max(0,i-2):i+8]))
-                              except (OSError, subprocess.SubprocessError) as e:
-                                  print("PDF_READ_ERROR", str(e))
-          PY
+          npm run generate -- --archive "$archive"
+          npm run generate -- --archive "$archive" --check
+          npm test
+          npm pack --dry-run
+      - name: Commit validated generated files
+        run: |
+          git add src/schemes.js src/palette-names.d.ts src/upstream-license.txt
+          if git diff --cached --quiet; then exit 0; fi
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'Generate verified Scientific Colour Maps 9.0.0 tables'
+          git push origin HEAD:refs/heads/upgrade-scientific-colour-maps-9

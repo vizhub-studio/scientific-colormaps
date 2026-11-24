@@ -63,7 +63,7 @@ The interpolation API is unchanged, but upstream revised existing palette RGB va
 
 ## Development
 
-`npm run generate` downloads the canonical, checksum-pinned Zenodo archive with Python 3 and regenerates the committed tables, type names, and upstream license. `npm run generate -- --check` verifies the committed outputs against that archive. A local archive can be supplied with `--archive PATH`.
+`npm run generate` downloads the canonical, checksum-pinned Zenodo archive with Python 3 and Poppler's `pdftotext` and regenerates the committed tables, type names, and upstream license. `npm run generate -- --check` verifies the committed outputs against that archive. A local archive can be supplied with `--archive PATH`.
 
 ```bash
 npm test
